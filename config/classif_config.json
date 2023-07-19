@@ -1,0 +1,5 @@
+{
+        "Enum": ["Get", "List", "Describe"],
+        "Creation":["Create"],
+        "Modification": ["Set", "Update", "Authorize", "Modify", "Attach", "Put", "Add"]
+}

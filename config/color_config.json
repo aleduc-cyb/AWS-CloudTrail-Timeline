@@ -1,0 +1,14 @@
+{
+    "mindmap": {
+        "iam": "blue",
+        "ec2": "red",
+        "s3": "green",
+        "others": "black"
+    },
+    "timechart": {
+        "Enum": "red",
+        "Creation": "blue",
+        "Modification": "green",
+        "Other": "black"
+    }
+}

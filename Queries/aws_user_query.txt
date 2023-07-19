@@ -1,0 +1,1 @@
+select "payload" as 'Payload' from events where ( "Account Name"='{}' AND "deviceType"='347' ) order by "startTime" desc last 24 hours
