@@ -80,7 +80,7 @@ def parse_log(log):
 def get_log_info(log): 
     service = log['eventSource']
     start = parse_time(log['eventTime'])
-    stop = start + datetime.timedelta(seconds=2)
+    stop = start + datetime.timedelta(minutes=1)
     threat_type = classify_action(log['eventName'])
     
     if ('requestParameters' in log) and (log['requestParameters']):

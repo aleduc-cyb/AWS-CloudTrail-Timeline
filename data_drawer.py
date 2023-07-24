@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import pydot
 import os
 import data_fetcher
@@ -15,18 +16,30 @@ def plot_timeline(arn, df):
     try:
         # Get colors from file to the dataset
         colors_dict = get_colors()['timechart']
-        df['Color']=df['Threat Type'].map(colors_dict)
+        df['Color'] = df['Threat Type'].map(colors_dict)
 
         # Setting the layout
-        plt.title('Timeline for ' + arn)
         plt.figure(constrained_layout=True)
-        plt.xlim(df['Start'].min(), df['Stop'].max())
+        plt.title('Timeline for ' + arn)
 
         # Plotting the chart
         plt.barh(y=df['Service_add'], width=df['Duration'], left=df['Start'], color=df['Color'])
-        
+
+        # Format the x-axis labels as datetime
+        date_format = mdates.DateFormatter('%Y-%m-%d %H:%M:%S')
+        plt.gca().xaxis.set_major_formatter(date_format)
+        plt.gca().xaxis.set_tick_params(rotation=45)
+
+        # Setting axis labels
+        plt.xticks(fontsize=5)
+        plt.yticks(fontsize=5)
+        plt.locator_params(axis='x', nbins=10)
+
         # Exporting the chart
-        plt.savefig("out/timechart.png")
+        plt.xlim(df['Start'].min(), df['Stop'].max())
+        plt.tight_layout()  # Ensures the labels fit within the figure
+        plt.savefig("out/timechart_" + arn + ".png")
+
     except Exception as e:
         global_logger.error('Failure in creating timechart')
         global_logger.error(str(e))
